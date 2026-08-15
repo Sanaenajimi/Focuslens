@@ -1,0 +1,39 @@
+# Python virtual environment
+.venv/
+venv/
+env/
+ENV/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*.pyo
+
+# PyTorch / ML files
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+
+# Datasets
+dataset_raw/
+datasets/
+data/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Environment / secrets
+.env
+.env.*
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+I
+openned-closed-eyes.zip
