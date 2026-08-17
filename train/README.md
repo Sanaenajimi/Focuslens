@@ -1,9 +1,9 @@
-# 🧠 FocusLens · Module d'entraînement — TON propre CNN
+# 🧠 FocusLens · Module d'entraînement — e CNN
 
-> Ici tu n'utilises plus le modèle de Google. Tu **entraînes ton propre réseau de neurones**
-> à reconnaître un œil ouvert vs fermé, à partir d'images. C'est le cœur "deep learning" du projet.
+> Ici je n'utilise plus le modèle de Google. j' **entraînes mon propre réseau de neurones**
+> à reconnaître un œil ouvert vs fermé, à partir d'images. 
 
-## Ce que tu vas entraîner
+## Ce que j'entraîne
 
 Un petit CNN (réseau de neurones convolutif) qui prend en entrée **une image d'œil (24×24 pixels, niveaux de gris)**
 et sort **la probabilité que l'œil soit fermé**. Une fois entraîné, ce modèle remplace l'heuristique EAR
@@ -36,22 +36,8 @@ Liens Kaggle (choisis-en un) :
 Expand-Archive -Path openned-closed-eyes.zip -DestinationPath dataset_raw -Force
 Get-ChildItem dataset_raw -Recurse -Directory | Select-Object FullName  #pour visualiser le dossier
 
-# Vide d'abord les README.txt que j'avais mis
-Remove-Item train\data\open\README.txt -ErrorAction SilentlyContinue
-Remove-Item train\data\closed\README.txt -ErrorAction SilentlyContinue
 
-# Copie les images d'entraînement
-Copy-Item "dataset_raw\TrainingSet\TrainingSet\Opened\*" train\data\open\ -Force
-Copy-Item "dataset_raw\TrainingSet\TrainingSet\Closed\*" train\data\closed\ -Force
-
-# Ajoute aussi le set d'amélioration (plus de données = meilleur modèle)
-Copy-Item "dataset_raw\ImprovementSet\ImprovementSet\ImprovementSet\Opened\*" train\data\open\ -Force
-Copy-Item "dataset_raw\ImprovementSet\ImprovementSet\ImprovementSet\Closed\*" train\data\closed\ -Force
-
-Si les dossiers s'appellent `Closed_Eyes`/`Open_Eyes`, renomme-les `closed`/`open`,
-ou passe-les en argument (voir `--open-dir` / `--closed-dir`).
-
-## Étapes (tout est scripté)
+## Étapes 
 
 ```bash
 pip install torch torchvision scikit-learn matplotlib pillow
@@ -70,15 +56,6 @@ python train/train_eye_cnn.py --data train/data --epochs 12
 #    Dans src/config.py, mets : use_cnn_eye = True
 #    FocusLens chargera automatiquement train/models/eye_cnn.pt
 ```
-
-## Ce que tu apprends (et pourras expliquer en entretien)
-
-- **Architecture CNN** : convolutions → pooling → couches denses, et POURQUOI chaque couche
-- **La boucle d'entraînement** : forward → loss → backward → step (la mécanique de l'apprentissage)
-- **Data augmentation** : pourquoi et comment on "invente" des variations pour généraliser
-- **Régularisation** : dropout, early stopping, pour éviter le surapprentissage
-- **Évaluation honnête** : split train/val/test, AUROC, matrice de confusion, pas juste l'accuracy
-- **Déploiement** : sauvegarder, recharger, et brancher le modèle dans une app réelle
 
 ## Architecture du CNN (fichier `models/eye_cnn.py`)
 
